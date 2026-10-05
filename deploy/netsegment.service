@@ -1,0 +1,21 @@
+[Unit]
+Description=NetSegment API
+After=network.target
+
+[Service]
+Type=simple
+User=netsegment
+Group=netsegment
+WorkingDirectory=/opt/netsegment
+EnvironmentFile=/opt/netsegment/.env
+ExecStart=/opt/netsegment/.venv/bin/python -m app
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+Environment=PYTHONDONTWRITEBYTECODE=1
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+{
+  "base_network": "172.16.0.0/22",
+  "departments": [
+    {"name": "Ventas", "hosts_needed": 120},
+    {"name": "Ingenieria", "hosts_needed": 500},
+    {"name": "Servidores", "hosts_needed": 50},
+    {"name": "Enlace-WAN", "hosts_needed": 2}
+  ]
+}

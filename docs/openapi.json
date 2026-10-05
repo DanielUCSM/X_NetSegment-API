@@ -1,0 +1,293 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "NetSegment API",
+    "description": "Planificacion IPv4 mediante FLSM, VLSM y agregacion CIDR exacta.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "Estado"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/subnetting/flsm": {
+      "post": {
+        "tags": [
+          "Subnetting"
+        ],
+        "summary": "Flsm",
+        "operationId": "flsm_api_v1_subnetting_flsm_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FLSMRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/subnetting/vlsm": {
+      "post": {
+        "tags": [
+          "Subnetting"
+        ],
+        "summary": "Vlsm",
+        "operationId": "vlsm_api_v1_subnetting_vlsm_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VLSMRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/supernetting/aggregate": {
+      "post": {
+        "tags": [
+          "Supernetting"
+        ],
+        "summary": "Aggregate",
+        "operationId": "aggregate_api_v1_supernetting_aggregate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AggregateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AggregateRequest": {
+        "properties": {
+          "networks": {
+            "items": {
+              "type": "string",
+              "format": "ipv4network"
+            },
+            "type": "array",
+            "maxItems": 4096,
+            "minItems": 1,
+            "title": "Networks"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "networks"
+        ],
+        "title": "AggregateRequest"
+      },
+      "Department": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "hosts_needed": {
+            "type": "integer",
+            "maximum": 4294967294.0,
+            "minimum": 1.0,
+            "title": "Hosts Needed"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "hosts_needed"
+        ],
+        "title": "Department"
+      },
+      "FLSMRequest": {
+        "properties": {
+          "network": {
+            "type": "string",
+            "format": "ipv4network",
+            "title": "Network"
+          },
+          "subnets_needed": {
+            "type": "integer",
+            "maximum": 4096.0,
+            "minimum": 1.0,
+            "title": "Subnets Needed"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "network",
+          "subnets_needed"
+        ],
+        "title": "FLSMRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "VLSMRequest": {
+        "properties": {
+          "base_network": {
+            "type": "string",
+            "format": "ipv4network",
+            "title": "Base Network"
+          },
+          "departments": {
+            "items": {
+              "$ref": "#/components/schemas/Department"
+            },
+            "type": "array",
+            "maxItems": 1024,
+            "minItems": 1,
+            "title": "Departments"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "base_network",
+          "departments"
+        ],
+        "title": "VLSMRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

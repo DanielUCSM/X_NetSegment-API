@@ -1,0 +1,20 @@
+digraph Architecture {
+  graph [rankdir=TB, bgcolor="white", pad="0.3", nodesep="0.3", ranksep="0.4"];
+  node [shape=box, style="rounded", fontname="Times-Roman", fontsize=16, color="black", margin="0.16,0.12"];
+  edge [fontname="Times-Roman", fontsize=13, color="black"];
+  client [label="Cliente HTTP\nSwagger UI o curl"];
+  server [label="Uvicorn\nTCP 8000"];
+  api [label="FastAPI\nRutas /api/v1"];
+  schema [label="Pydantic\nValidacion de entradas"];
+  errors [label="Respuesta JSON\n400 o 422"];
+  engine [label="Motor IPv4 con ipaddress\nFLSM | VLSM | CIDR"];
+  result [label="Respuesta JSON\n200 OK"];
+  client -> server [label="HTTP y JSON"];
+  server -> api;
+  api -> schema;
+  schema -> engine [label="Entrada valida"];
+  schema -> errors [label="Entrada invalida"];
+  engine -> errors [label="Capacidad o agregacion invalida"];
+  engine -> result;
+  {rank=same; errors; engine;}
+}

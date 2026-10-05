@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="560" viewBox="0 0 1100 560">
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10" fill="black"/></marker></defs>
+<rect width="1100" height="560" fill="white"/>
+<g fill="white" stroke="black" stroke-width="2">
+<rect x="20" y="25" width="290" height="95" rx="10"/>
+<rect x="405" y="25" width="290" height="95" rx="10"/>
+<rect x="790" y="25" width="290" height="95" rx="10"/>
+<rect x="405" y="200" width="330" height="100" rx="10"/>
+<rect x="405" y="395" width="330" height="115" rx="10"/>
+<rect x="790" y="405" width="290" height="100" rx="10"/>
+<rect x="20" y="405" width="290" height="100" rx="10"/>
+</g>
+<g stroke="black" stroke-width="2" fill="none" marker-end="url(#arrow)">
+<path d="M310 72 H405"/><path d="M695 72 H790"/>
+<path d="M935 120 V160 H570 V200"/>
+<path d="M570 300 V395"/><path d="M735 250 H1050 V405"/>
+<path d="M735 452 H790"/><path d="M405 452 H310"/>
+</g>
+<g font-family="Times New Roman,serif" fill="black" text-anchor="middle" font-size="28">
+<text x="165" y="63">Cliente HTTP</text><text x="165" y="96">Swagger UI o curl</text>
+<text x="550" y="63">Uvicorn</text><text x="550" y="96">TCP 8000</text>
+<text x="935" y="63">FastAPI</text><text x="935" y="96">Rutas /api/v1</text>
+<text x="570" y="240">Pydantic</text><text x="570" y="277">Validación de entradas</text>
+<text x="570" y="433">Motor IPv4</text><text x="570" y="466">ipaddress</text><text x="570" y="498">FLSM | VLSM | CIDR</text>
+<text x="935" y="445">Respuesta JSON</text><text x="935" y="480">400 o 422</text>
+<text x="165" y="445">Respuesta JSON</text><text x="165" y="480">200 OK</text>
+</g>
+<g font-family="Times New Roman,serif" fill="black" font-size="23">
+<text x="325" y="58">HTTP</text><text x="599" y="349">Entrada válida</text>
+<text x="756" y="324">Entrada inválida</text><text x="744" y="431">400</text>
+</g>
+</svg>
