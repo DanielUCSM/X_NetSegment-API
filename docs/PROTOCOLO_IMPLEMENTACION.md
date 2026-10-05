@@ -4,9 +4,9 @@ Este protocolo documenta la instalación, configuración, ejecución y validaci�
 
 ## a Información general
 
-Nombre del proyecto: Desarrollo de un motor de microservicio para segmentación, asignación y agregación de direccionamiento IPv4 en entornos de red locales.
+Nombre del proyecto: Desarrollo de un motor de microservicio para segmentación, asignación y agregación de direccionamiento IPv4/IPv6 en entornos de red locales.
 
-Nombre del sistema: NetSegment API. Número de grupo: 13. Institución: Universidad Católica de Santa María. Escuela Profesional: Ingeniería de Sistemas. Docente: Javier Fernando Angulo Osorio.
+Nombre del sistema: NetSegment API. Número de grupo: 13. Institución: Universidad Católica de Santa María. Facultad: Ciencias e Ingenierías Físicas y Formales. Escuela Profesional: Ingeniería de Sistemas. Docente: Javier Fernando Angulo Osorio.
 
 Curso: Computación en Red III. Secciones del equipo: B y C. Fecha de elaboración: 4 de octubre de 2026. Versión del sistema: 1.0.0.
 
@@ -16,7 +16,7 @@ Curso: Computación en Red III. Secciones del equipo: B y C. Fecha de elaboraci�
 | 2024000333 | Benites Castro, Arturo José | B |
 | 2024000178 | Limache Quispe, Felix Fabricio | B |
 | 2024001212 | Mollo Huayhua, Luis Felipe | B |
-| 2025002762 | Rodríguez Fádel, Gian Piero Khalil | - |
+| 2025002762 | Rodríguez Fádel, Gian Piero Khalil | B |
 | 2024000462 | Vega Mamani, Anthony Yerson | B |
 
 Repositorio del proyecto: https://github.com/DanielUCSM/X_NetSegment-API
@@ -60,7 +60,7 @@ Una entrada inválida produce HTTP 422. Un requerimiento que supera la capacidad
 | httpx | 0.28.1 | Cliente de las pruebas HTTP |
 | Git y GitHub | Sin versión de servidor fijada | Código y colaboración |
 
-requirements.txt fija dependencias de ejecución directas y transitivas. requirements-dev.txt incorpora las herramientas de prueba. No se requiere motor de base de datos, servidor SQL, servicio de almacenamiento ni API externa. La conexión a Internet se usa para clonar e instalar dependencias; los cálculos se realizan localmente.
+requirements.txt fija dependencias de ejecución directas y transitivas. requirements-dev.txt incorpora las herramientas de prueba. No se requiere motor de base de datos, servidor SQL, servicio de almacenamiento ni API externa. La conexión a Internet se usa para clonar desde GitHub e instalar dependencias desde PyPI. Swagger UI y ReDoc cargan recursos desde cdn.jsdelivr.net; el navegador necesita acceso a ese dominio. Los cálculos y los clientes curl funcionan sin ese CDN.
 
 El entorno recomendado de despliegue es Ubuntu Server 24.04 LTS con systemd. La verificación efectuada corresponde a Linux x86_64 y Python 3.12.14; no se declara probado el despliegue remoto ni otros sistemas operativos.
 
@@ -223,7 +223,7 @@ Resultado esperado: reinicio automático ante cambios. Este comando usa argument
 
 Abrir http://127.0.0.1:8000/docs en un navegador. La página se sirve desde FastAPI y no requiere ejecutar un frontend separado. Seleccionar una ruta POST, pulsar Try it out, escribir el JSON del ejemplo y pulsar Execute. /redoc ofrece otra vista de documentación y /openapi.json entrega el contrato.
 
-Resultado esperado: rutas visibles y respuestas de la API en la misma página. curl o scripts propios pueden utilizarse como clientes alternativos. Una aplicación cliente futura requerirá su propio procedimiento; no forma parte de esta versión.
+Resultado esperado: rutas visibles y respuestas de la API en la misma página. Si la interfaz no carga por falta de acceso al CDN, comprobar /health y /openapi.json y utilizar curl o scripts propios como clientes alternativos. Una aplicación cliente futura requerirá su propio procedimiento; no forma parte de esta versión.
 
 ### e10 Comprobar disponibilidad y operaciones
 
